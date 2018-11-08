@@ -1,0 +1,13 @@
+server:
+  port: 8090
+  context-path: /commerce
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/commerce
+    username: root
+    password: 111
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
