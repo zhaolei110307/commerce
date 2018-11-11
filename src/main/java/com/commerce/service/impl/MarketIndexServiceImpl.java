@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.commerce.dao.IMarketIndexDao;
 import com.commerce.entity.MarketIndex;
 import com.commerce.service.IMarketIndexService;
-import com.commerce.util.NumberFormat;
+import com.commerce.util.BigDecimalUtil;
 import com.commerce.util.POIUtil;
 
 
@@ -34,23 +34,23 @@ public class MarketIndexServiceImpl implements IMarketIndexService {
 			MarketIndex index = null;
 			for (String[] strings : infos) {
 				index = new MarketIndex();
-				index.setSale(strings[0]);
-				index.setSaleIndex(strings[1]);
+				index.setSale(BigDecimalUtil.doubleValue(strings[0]));
+				index.setSaleIndex(BigDecimalUtil.doubleValue(strings[1]));
 
-				index.setFlow(strings[3]);
-				index.setFlowIndex(strings[4]);
+				index.setFlow(BigDecimalUtil.doubleValue(strings[3]));
+				index.setFlowIndex(BigDecimalUtil.doubleValue(strings[4]));
 
-				index.setSearch(strings[6]);
-				index.setSearchIndex(strings[7]);
+				index.setSearch(BigDecimalUtil.doubleValue(strings[6]));
+				index.setSearchIndex(BigDecimalUtil.doubleValue(strings[7]));
 
-				index.setPay(strings[9]);
-				index.setPayIndex(strings[10]);
+				index.setPay(BigDecimalUtil.doubleValue(strings[9]));
+				index.setPayIndex(BigDecimalUtil.doubleValue(strings[10]));
 				
-				index.setCollect(strings[12]);
-				index.setCollectIndex(strings[13]);
+				index.setCollect(BigDecimalUtil.doubleValue(strings[12]));
+				index.setCollectIndex(BigDecimalUtil.doubleValue(strings[13]));
 				
-				index.setAddCart(strings[15]);
-				index.setAddCartIndex(strings[16]);
+//				index.setAddCart(strings[15]);
+//				index.setAddCartIndex(strings[16]);
 				marketIndexDao.save(index);
 				num ++;
 			}
