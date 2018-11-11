@@ -34,23 +34,23 @@ public class MarketIndexServiceImpl implements IMarketIndexService {
 			MarketIndex index = null;
 			for (String[] strings : infos) {
 				index = new MarketIndex();
-				index.setSale(NumberFormat.StringToInteger(strings[0]));
-				index.setSaleIndex(NumberFormat.StringToInteger(strings[1]));
+				index.setSale(strings[0]);
+				index.setSaleIndex(strings[1]);
 
-				index.setFlow(NumberFormat.StringToInteger(strings[3]));
-				index.setFlowIndex(NumberFormat.StringToInteger(strings[4]));
+				index.setFlow(strings[3]);
+				index.setFlowIndex(strings[4]);
 
-				index.setSearch(NumberFormat.StringToInteger(strings[6]));
-				index.setSearchIndex(NumberFormat.StringToInteger(strings[7]));
+				index.setSearch(strings[6]);
+				index.setSearchIndex(strings[7]);
 
-				index.setPay(NumberFormat.StringToInteger(strings[9]));
-				index.setPayIndex(NumberFormat.StringToInteger(strings[10]));
+				index.setPay(strings[9]);
+				index.setPayIndex(strings[10]);
 				
-				index.setCollect(NumberFormat.StringToInteger(strings[12]));
-				index.setCollectIndex(NumberFormat.StringToInteger(strings[13]));
+				index.setCollect(strings[12]);
+				index.setCollectIndex(strings[13]);
 				
-				index.setAddCart(NumberFormat.StringToInteger(strings[15]));
-				index.setAddCartIndex(NumberFormat.StringToInteger(strings[16]));
+				index.setAddCart(strings[15]);
+				index.setAddCartIndex(strings[16]);
 				marketIndexDao.save(index);
 				num ++;
 			}

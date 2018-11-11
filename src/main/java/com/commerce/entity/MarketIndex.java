@@ -22,36 +22,36 @@ public class MarketIndex implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Integer sale;//(销量)销售额
+	private String sale;//(销量)销售额
 
 	@Column(name="sale_index")
-	private Integer saleIndex;//交易指数
+	private String saleIndex;//交易指数
 	
-	private Integer flow;//(流量)真实UV
+	private String flow;//(流量)真实UV
 	
 	@Column(name="flow_index")
-	private Integer flowIndex;//流量指数	
+	private String flowIndex;//流量指数	
 	
-	private Integer search;//真实搜素
+	private String search;//真实搜素
 	
 	@Column(name="search_index")
-	private Integer searchIndex;//搜素人气
+	private String searchIndex;//搜素人气
 	
-	private Integer pay;
+	private String pay;
 	
 	@Column(name="pay_index")
-	private Integer payIndex;
+	private String payIndex;
 	
-	private Integer collect;
+	private String collect;
 	
 	@Column(name="collect_index")
-	private Integer collectIndex;
+	private String collectIndex;
 	
 	@Column(name="add_cart")
-	private Integer addCart;
+	private String addCart;
 	
 	@Column(name="add_cart_index")
-	private Integer addCartIndex;
+	private String addCartIndex;
 	
 	public MarketIndex() {
 		// TODO Auto-generated constructor stub
@@ -65,99 +65,99 @@ public class MarketIndex implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getSale() {
+	public String getSale() {
 		return sale;
 	}
 
-	public void setSale(Integer sale) {
+	public void setSale(String sale) {
 		this.sale = sale;
 	}
 
-	public Integer getSaleIndex() {
+	public String getSaleIndex() {
 		return saleIndex;
 	}
 
-	public void setSaleIndex(Integer saleIndex) {
+	public void setSaleIndex(String saleIndex) {
 		this.saleIndex = saleIndex;
 	}
 
-	public Integer getFlow() {
+	public String getFlow() {
 		return flow;
 	}
 
-	public void setFlow(Integer flow) {
+	public void setFlow(String flow) {
 		this.flow = flow;
 	}
 
-	public Integer getFlowIndex() {
+	public String getFlowIndex() {
 		return flowIndex;
 	}
 
-	public void setFlowIndex(Integer flowIndex) {
+	public void setFlowIndex(String flowIndex) {
 		this.flowIndex = flowIndex;
 	}
 
-	public Integer getSearch() {
+	public String getSearch() {
 		return search;
 	}
 
-	public void setSearch(Integer search) {
+	public void setSearch(String search) {
 		this.search = search;
 	}
 
-	public Integer getSearchIndex() {
+	public String getSearchIndex() {
 		return searchIndex;
 	}
 
-	public void setSearchIndex(Integer searchIndex) {
+	public void setSearchIndex(String searchIndex) {
 		this.searchIndex = searchIndex;
 	}
 
-	public Integer getPay() {
+	public String getPay() {
 		return pay;
 	}
 
-	public void setPay(Integer pay) {
+	public void setPay(String pay) {
 		this.pay = pay;
 	}
 
-	public Integer getPayIndex() {
+	public String getPayIndex() {
 		return payIndex;
 	}
 
-	public void setPayIndex(Integer payIndex) {
+	public void setPayIndex(String payIndex) {
 		this.payIndex = payIndex;
 	}
 
-	public Integer getCollect() {
+	public String getCollect() {
 		return collect;
 	}
 
-	public void setCollect(Integer collect) {
+	public void setCollect(String collect) {
 		this.collect = collect;
 	}
 
-	public Integer getCollectIndex() {
+	public String getCollectIndex() {
 		return collectIndex;
 	}
 
-	public void setCollectIndex(Integer collectIndex) {
+	public void setCollectIndex(String collectIndex) {
 		this.collectIndex = collectIndex;
 	}
 
-	public Integer getAddCart() {
+	public String getAddCart() {
 		return addCart;
 	}
 
-	public void setAddCart(Integer addCart) {
+	public void setAddCart(String addCart) {
 		this.addCart = addCart;
 	}
 
-	public Integer getAddCartIndex() {
+	public String getAddCartIndex() {
 		return addCartIndex;
 	}
 
-	public void setAddCartIndex(Integer addCartIndex) {
+	public void setAddCartIndex(String addCartIndex) {
 		this.addCartIndex = addCartIndex;
 	}
 
