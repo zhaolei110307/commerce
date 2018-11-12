@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.commerce.dao.IMarketIndexDao;
+import com.commerce.entity.MarketIndexType;
 import com.commerce.service.IMarketIndexService;
 
 @RestController
@@ -23,12 +24,41 @@ public class MarketIndexController {
 	
 	@PostMapping("/search")
 	public JSONObject search(@RequestBody JSONObject params) {
-//		Object findValue = marketIndexDao.findValue("sale", "sale_index", "65591");
-//		Object findValue = marketIndexDao.findValue("sale_index", "65591");
-		Object findValue = marketIndexService.findValueBySearchKey("sale", "sale_index", "65591");
+		int type = params.getIntValue("type");
+		String resultCol = MarketIndexType.getColumnByType(type);
+		if (resultCol == null) {
+			throw new RuntimeException("未知查询类型");
+		}
+		String searchVal = MarketIndexType.getSearchColumnByType(type);
+		if (searchVal == null) {
+			throw new RuntimeException("未知查询类型");
+		}
+		Object findValue = marketIndexService
+			.findValueBySearchKey(resultCol, searchVal, params.getString("value"));
 		JSONObject result = new JSONObject();
 		result.put("code", 1);
 		result.put("content", findValue);
+		return result;
+	}
+	
+	@PostMapping("/getLimit")
+	public JSONObject getLimit(@RequestBody JSONObject params) {
+		int type = params.getIntValue("type");
+		String resultCol = MarketIndexType.getColumnByType(type);
+		if (resultCol == null) {
+			throw new RuntimeException("未知查询类型");
+		}
+		String searchVal = MarketIndexType.getSearchColumnByType(type);
+		if (searchVal == null) {
+			throw new RuntimeException("未知查询类型");
+		}
+		Object maxVal = marketIndexService
+			.findMaxValue(resultCol, searchVal, params.getString("value"));
+		Object minVal = marketIndexService
+				.findMinValue(resultCol, searchVal, params.getString("value"));
+		JSONObject result = new JSONObject();
+		result.put("code", 1);
+//		result.put("content", findValue);
 		return result;
 	}
 	

@@ -28,7 +28,7 @@ public class MarketIndexServiceImpl implements IMarketIndexService {
 	EntityManager em;
 	
 	@Override
-	public String importFile(MultipartFile file) {//.xls
+	public String importFile(MultipartFile file) {
 		Integer num = 0;
 		StringBuffer errMsg = new StringBuffer();
 		try {
@@ -72,7 +72,37 @@ public class MarketIndexServiceImpl implements IMarketIndexService {
 	}
 
 	@Override
-	public Object findValueBySearchKey(String resultKey, String searchKey, String searchVal) {
+	public Double findValueBySearchKey(String resultKey, String searchKey, String searchVal) {
+		Double result = findEqualsValue(resultKey, searchKey, searchVal);
+		if (result == null) {
+			Double max = findCloseBig(resultKey, searchKey, searchVal);
+			Double min = findCloseSmall(resultKey, searchKey, searchVal);
+			if (max == null) {
+				max = 0D;
+			}
+			if (min == null) {
+				min = 0D;
+			}
+			return (max + min) / 2.0;
+		}
+		return result;
+	}
+
+	@Override
+	public Double findMaxValue(String resultKey, String searchKey, String searchVal) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select max(");
+		sb.append(resultKey);
+		sb.append(") from MarketIndex where ");
+		sb.append(searchKey);
+		sb.append(" = ");
+		sb.append(searchVal);
+		Query query = em.createQuery(sb.toString());
+		Object obj = query.getSingleResult();
+		return obj == null ? null : (Double)obj;
+	}
+	
+	public Double findEqualsValue(String resultKey, String searchKey, String searchVal) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("select ");
 		sb.append(resultKey);
@@ -81,6 +111,55 @@ public class MarketIndexServiceImpl implements IMarketIndexService {
 		sb.append(" = ");
 		sb.append(searchVal);
 		Query query = em.createQuery(sb.toString());
-		return query.getSingleResult();
+		Object obj = query.getSingleResult();
+		return obj == null ? null : (Double)obj;
+	}
+
+	@Override
+	public Double findMinValue(String resultKey, String searchKey, String searchVal) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select min(");
+		sb.append(resultKey);
+		sb.append(") from MarketIndex where ");
+		sb.append(searchKey);
+		sb.append(" = ");
+		sb.append(searchVal);
+		Query query = em.createQuery(sb.toString());
+		Object obj = query.getSingleResult();
+		return obj == null ? null : (Double)obj;
+	}
+
+	@Override
+	public Double findCloseBig(String resultKey, String searchKey, String searchVal) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select ");
+		sb.append(resultKey);
+		sb.append(" from MarketIndex where ");
+		sb.append(searchKey);
+		sb.append(" > ");
+		sb.append(searchVal);
+		sb.append("order by ");
+		sb.append(searchKey);
+		sb.append(" ASC");
+		Query query = em.createQuery(sb.toString());
+		Object obj = query.getSingleResult();
+		return obj == null ? null : (Double)obj;
+	}
+
+	@Override
+	public Double findCloseSmall(String resultKey, String searchKey, String searchVal) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select ");
+		sb.append(resultKey);
+		sb.append(" from MarketIndex where ");
+		sb.append(searchKey);
+		sb.append(" < ");
+		sb.append(searchVal);
+		sb.append("order by ");
+		sb.append(searchKey);
+		sb.append(" DESC");
+		Query query = em.createQuery(sb.toString());
+		Object obj = query.getSingleResult();
+		return obj == null ? null : (Double)obj;
 	}
 }
