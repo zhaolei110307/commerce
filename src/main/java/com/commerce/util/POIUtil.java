@@ -45,6 +45,11 @@ public class POIUtil {
 				}
 				// 获得当前sheet的开始行
 				int firstRowNum = sheet.getFirstRowNum();
+				Row firstRow = sheet.getRow(firstRowNum);
+				if (firstRow == null) {
+					continue ;
+				}
+				int lastCellNum = firstRow.getLastCellNum();
 				// 获得当前sheet的结束行
 				int lastRowNum = sheet.getLastRowNum();
 				// 循环除了第一行的所有行
@@ -57,8 +62,8 @@ public class POIUtil {
 					// 获得当前行的开始列
 					int firstCellNum = row.getFirstCellNum();
 					// 获得当前行的列数
-					int lastCellNum = row.getPhysicalNumberOfCells();
-					String[] cells = new String[row.getPhysicalNumberOfCells()];
+//					int lastCellNum = row.getPhysicalNumberOfCells();
+					String[] cells = new String[lastCellNum];
 					// 循环当前行
 					for (int cellNum = firstCellNum; cellNum < lastCellNum; cellNum++) {
 						Cell cell = row.getCell(cellNum);

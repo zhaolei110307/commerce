@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
+import com.commerce.dao.IMarketIndexDao;
 import com.commerce.service.IMarketIndexService;
 
 @RestController
@@ -17,17 +18,26 @@ public class MarketIndexController {
 	
 	@Autowired
 	IMarketIndexService marketIndexService;
+	@Autowired
+	IMarketIndexDao marketIndexDao;
 	
 	@PostMapping("/search")
 	public JSONObject search(@RequestBody JSONObject params) {
+//		Object findValue = marketIndexDao.findValue("sale", "sale_index", "65591");
+//		Object findValue = marketIndexDao.findValue("sale_index", "65591");
+		Object findValue = marketIndexService.findValueBySearchKey("sale", "sale_index", "65591");
 		JSONObject result = new JSONObject();
 		result.put("code", 1);
+		result.put("content", findValue);
 		return result;
 	}
 	
 	@PostMapping("/upload")
 	public JSONObject upload(@RequestParam MultipartFile file) {
 		String fileId = marketIndexService.importFile(file);
-		return null;
+		JSONObject result = new JSONObject();
+		result.put("code", 1);
+		result.put("content", fileId);
+		return result;
 	}
 }

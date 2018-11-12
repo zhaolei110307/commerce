@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/commerce
     username: root
-    password: 111
+    password: 123456
   jpa:
     hibernate:
       ddl-auto: update
