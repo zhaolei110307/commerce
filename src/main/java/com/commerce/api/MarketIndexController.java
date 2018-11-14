@@ -44,21 +44,20 @@ public class MarketIndexController {
 	@PostMapping("/getLimit")
 	public JSONObject getLimit(@RequestBody JSONObject params) {
 		int type = params.getIntValue("type");
-		String resultCol = MarketIndexType.getColumnByType(type);
-		if (resultCol == null) {
-			throw new RuntimeException("未知查询类型");
-		}
 		String searchVal = MarketIndexType.getSearchColumnByType(type);
 		if (searchVal == null) {
 			throw new RuntimeException("未知查询类型");
 		}
 		Object maxVal = marketIndexService
-			.findMaxValue(resultCol, searchVal, params.getString("value"));
+			.findMaxValue(searchVal);
 		Object minVal = marketIndexService
-				.findMinValue(resultCol, searchVal, params.getString("value"));
+				.findMinValue(searchVal);
+		JSONObject content = new JSONObject();
+		content.put("maxVal", maxVal);
+		content.put("minVal", minVal);
 		JSONObject result = new JSONObject();
 		result.put("code", 1);
-//		result.put("content", findValue);
+		result.put("content", content);
 		return result;
 	}
 	

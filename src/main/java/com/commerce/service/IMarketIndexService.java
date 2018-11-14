@@ -11,9 +11,9 @@ public interface IMarketIndexService {
 	//查询数据
 	public Double findValueBySearchKey(String resultKey, String searchKey, String searchVal);
 	//查询最大值
-	public Double findMaxValue(String resultKey, String searchKey, String searchVal);
+	public Double findMaxValue(String resultKey);
 	//查询最小值
-	public Double findMinValue(String resultKey, String searchKey, String searchVal);
+	public Double findMinValue(String resultKey);
 	//查询最近最大
 	public Double findCloseBig(String resultKey, String searchKey, String searchVal);
 	//查询最近最小

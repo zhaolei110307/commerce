@@ -89,77 +89,86 @@ public class MarketIndexServiceImpl implements IMarketIndexService {
 	}
 
 	@Override
-	public Double findMaxValue(String resultKey, String searchKey, String searchVal) {
+	public Double findMaxValue(String resultKey) {
 		StringBuffer sb = new StringBuffer();
-		sb.append("select max(");
+		sb.append("select max( ");
 		sb.append(resultKey);
-		sb.append(") from MarketIndex where ");
-		sb.append(searchKey);
-		sb.append(" = ");
-		sb.append(searchVal);
-		Query query = em.createQuery(sb.toString());
+		sb.append(" ) from market_index ");
+		Query query = em.createNativeQuery(sb.toString());
 		Object obj = query.getSingleResult();
 		return obj == null ? null : (Double)obj;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public Double findEqualsValue(String resultKey, String searchKey, String searchVal) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("select ");
 		sb.append(resultKey);
-		sb.append(" from MarketIndex where ");
+		sb.append(" from market_index where ");
 		sb.append(searchKey);
 		sb.append(" = ");
 		sb.append(searchVal);
-		Query query = em.createQuery(sb.toString());
-		Object obj = query.getSingleResult();
+		Query query = em.createNativeQuery(sb.toString());
+		List resultList = query.getResultList();
+		Object obj = null;
+		if (resultList != null && resultList.size() > 0) {
+			obj = resultList.get(0);
+		}
 		return obj == null ? null : (Double)obj;
 	}
 
 	@Override
-	public Double findMinValue(String resultKey, String searchKey, String searchVal) {
+	public Double findMinValue(String resultKey) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("select min(");
 		sb.append(resultKey);
-		sb.append(") from MarketIndex where ");
-		sb.append(searchKey);
-		sb.append(" = ");
-		sb.append(searchVal);
-		Query query = em.createQuery(sb.toString());
+		sb.append(") from market_index");
+		Query query = em.createNativeQuery(sb.toString());
 		Object obj = query.getSingleResult();
 		return obj == null ? null : (Double)obj;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Double findCloseBig(String resultKey, String searchKey, String searchVal) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("select ");
 		sb.append(resultKey);
-		sb.append(" from MarketIndex where ");
+		sb.append(" from market_index where ");
 		sb.append(searchKey);
 		sb.append(" > ");
 		sb.append(searchVal);
-		sb.append("order by ");
+		sb.append(" order by ");
 		sb.append(searchKey);
 		sb.append(" ASC");
-		Query query = em.createQuery(sb.toString());
-		Object obj = query.getSingleResult();
+		Query query = em.createNativeQuery(sb.toString());
+		List resultList = query.getResultList();
+		Object obj = null;
+		if (resultList != null && resultList.size() > 0) {
+			obj = resultList.get(0);
+		}
 		return obj == null ? null : (Double)obj;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Double findCloseSmall(String resultKey, String searchKey, String searchVal) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("select ");
 		sb.append(resultKey);
-		sb.append(" from MarketIndex where ");
+		sb.append(" from market_index where ");
 		sb.append(searchKey);
 		sb.append(" < ");
 		sb.append(searchVal);
-		sb.append("order by ");
+		sb.append(" order by ");
 		sb.append(searchKey);
 		sb.append(" DESC");
-		Query query = em.createQuery(sb.toString());
-		Object obj = query.getSingleResult();
+		Query query = em.createNativeQuery(sb.toString());
+		List resultList = query.getResultList();
+		Object obj = null;
+		if (resultList != null && resultList.size() > 0) {
+			obj = resultList.get(0);
+		}
 		return obj == null ? null : (Double)obj;
 	}
 }
