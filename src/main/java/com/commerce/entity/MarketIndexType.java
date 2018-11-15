@@ -5,12 +5,12 @@ package com.commerce.entity;
 //真实收藏数	收藏人气		真实加购	加购人气
 public class MarketIndexType {
 
-	public static final int SALE = 1;
-	public static final int FLOW = 2;
-	public static final int SEARCH = 3;
-	public static final int PAY = 4;
-	public static final int COLLECT = 5;
-	public static final int ADD = 6;
+	public static final int SALE = 1;//销量
+	public static final int FLOW = 2;//流量
+	public static final int SEARCH = 3;//搜索
+	public static final int PAY = 4;//支付转化
+	public static final int COLLECT = 5;//收藏
+	public static final int ADD = 6;//加购
 
 	public static String getColumnByType(int type) {
 		if (type == SALE) {
